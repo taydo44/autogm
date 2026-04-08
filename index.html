@@ -4,9 +4,128 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>G & M Family Auto Repair — Seattle, WA</title>
-  <meta name="description" content="Seattle's trusted family-owned auto repair shop since 1998. ASE-certified technicians, honest pricing, 12-month warranty. Call (206) 555-0198." />
+  <meta name="description" content="Seattle's trusted family-owned auto repair shop. ASE-certified technicians, honest pricing, 12-month warranty. Call (206) 555-0198." />
   <link rel="stylesheet" href="css/style.css" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔧</text></svg>" />
+  <style>
+    /* ── HERO WITH REAL PHOTO ── */
+    .hero {
+      min-height: 100vh;
+      position: relative;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      padding-top: 72px;
+    }
+
+    .hero-photo-bg {
+      position: absolute; inset: 0;
+      background-image: url('images/IMG_2158.jpeg');
+      background-size: cover;
+      background-position: center 40%;
+      z-index: 0;
+    }
+
+    .hero-photo-bg::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(
+        135deg,
+        rgba(5,13,26,0.88) 0%,
+        rgba(5,13,26,0.75) 50%,
+        rgba(5,13,26,0.55) 100%
+      );
+    }
+
+    /* ── SLIDESHOW STRIP ── */
+    .shop-slideshow {
+      position: relative;
+      width: 100%;
+      height: 420px;
+      overflow: hidden;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-hard);
+    }
+
+    .shop-slide {
+      position: absolute; inset: 0;
+      background-size: cover;
+      background-position: center;
+      opacity: 0;
+      transition: opacity 1.2s ease;
+    }
+
+    .shop-slide.active { opacity: 1; }
+
+    .shop-slide::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom, transparent 50%, rgba(5,13,26,0.7) 100%);
+    }
+
+    .slide-caption {
+      position: absolute;
+      bottom: 20px; left: 20px; right: 20px;
+      z-index: 2;
+      color: white;
+      font-size: 13px;
+      font-weight: 500;
+      opacity: 0.8;
+    }
+
+    .slide-dots {
+      position: absolute;
+      bottom: 12px; right: 16px;
+      z-index: 2;
+      display: flex; gap: 6px;
+    }
+
+    .slide-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.4);
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .slide-dot.active { background: var(--orange-400); }
+
+    /* ── ACTION PHOTOS IN SERVICES ── */
+    .service-photo {
+      width: 100%; height: 200px;
+      object-fit: cover;
+      border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+      display: block;
+    }
+
+    .service-card-dark { overflow: hidden; }
+
+    /* ── ABOUT PHOTO GRID ── */
+    .about-photo-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 260px 200px;
+      gap: 10px;
+      border-radius: 20px;
+      overflow: hidden;
+    }
+
+    .about-photo-grid img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .about-photo-grid img:first-child {
+      grid-column: 1 / -1;
+    }
+
+    @media(max-width:768px) {
+      .about-photo-grid { grid-template-columns: 1fr; grid-template-rows: auto; }
+      .about-photo-grid img:first-child { grid-column: 1; }
+      .shop-slideshow { height: 280px; }
+    }
+  </style>
 </head>
 <body>
 
@@ -19,47 +138,44 @@
       <span class="nav-logo-sub">Seattle, Washington</span>
     </div>
   </div>
- <ul class="nav-links" id="navLinks">
-  <li><a href="index.html" class="active">Home</a></li>
-  <li><a href="pages/services.html">Services</a></li>
-  <li><a href="pages/about.html">About</a></li>
-  <li><a href="pages/reviews.html">Reviews</a></li>
-  <li><a href="#booking" class="nav-cta">Book Appointment</a></li>
-</ul>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index.html" class="active">Home</a></li>
+    <li><a href="pages/services.html">Services</a></li>
+    <li><a href="pages/about.html">About</a></li>
+    <li><a href="pages/reviews.html">Reviews</a></li>
+    <li><a href="#booking" class="nav-cta">Book Appointment</a></li>
+  </ul>
   <button class="hamburger" id="hamburger" aria-label="Menu">
     <span></span><span></span><span></span>
   </button>
 </nav>
 
 <!-- HERO -->
-<section style="padding:0;background:transparent;position:relative;z-index:1;">
-  <div class="hero-content">
+<section class="hero">
+  <div class="hero-photo-bg"></div>
+  <div class="hero-content" style="position:relative;z-index:2;">
     <div class="hero-left">
       <div class="hero-badge fade-up">
         <div class="hero-badge-dot"></div>
-        <span>Seattle's Trusted Auto Shop Since 1998</span>
+        <span>Seattle's Trusted Auto Shop</span>
       </div>
       <h1 class="hero-title fade-up">
         Your Car Deserves<br/><span class="accent">Family Care</span>
       </h1>
       <p class="hero-desc fade-up">
-        Honest diagnostics, transparent pricing, and repairs done right — by Seattle neighbors who treat your car like their own for over 25 years.
+        Honest diagnostics, transparent pricing, and repairs done right — by Seattle neighbors who treat your car like their own.
       </p>
       <div class="hero-actions fade-up">
-        <a href="tel:+12065550198" class="btn-primary">
-          📞 Call Us Now
-        </a>
-        <a href="#booking" class="btn-outline">
-          Book Appointment →
-        </a>
+        <a href="tel:+12062443243" class="btn-primary">📞 Call Us Now</a>
+        <a href="#booking" class="btn-outline">Book Appointment →</a>
       </div>
       <div class="hero-stats fade-up">
         <div>
-          <div class="hero-stat-num" data-count="25" data-suffix="+">0+</div>
+          <div class="hero-stat-num" data-count="10" data-suffix="+">0+</div>
           <div class="hero-stat-label">Years in Seattle</div>
         </div>
         <div>
-          <div class="hero-stat-num" data-count="8000" data-suffix="+">0+</div>
+          <div class="hero-stat-num" data-count="5000" data-suffix="+">0+</div>
           <div class="hero-stat-label">Cars Repaired</div>
         </div>
         <div>
@@ -68,42 +184,26 @@
         </div>
       </div>
     </div>
+
+    <!-- REAL PHOTO SLIDESHOW replacing hero card -->
     <div class="hero-visual">
-      <div class="hero-card-stack">
-        <div class="hero-card hero-card-main">
-          <div class="hero-card-badge">ASE Certified</div>
-          <div class="hero-card-title">Family Owned &<br/>Seattle Proud</div>
-          <div class="hero-card-desc">George & Maria Vasquez · Est. 1998 · South Seattle</div>
-          <div class="hero-card-metrics">
-            <div class="metric-box">
-              <div class="metric-val">4.9★</div>
-              <div class="metric-label">Google Rating</div>
-            </div>
-            <div class="metric-box">
-              <div class="metric-val">312</div>
-              <div class="metric-label">Reviews</div>
-            </div>
-            <div class="metric-box">
-              <div class="metric-val">12mo</div>
-              <div class="metric-label">Warranty</div>
-            </div>
-            <div class="metric-box">
-              <div class="metric-val" style="color:var(--navy-300);">Open</div>
-              <div class="metric-label">Mon–Sat</div>
-            </div>
-          </div>
+      <div class="shop-slideshow" id="shopSlideshow">
+        <div class="shop-slide active" style="background-image:url('images/IMG_2158.jpeg');">
+          <div class="slide-caption">G&M Auto Repair — Seattle, WA</div>
         </div>
-        <div class="hero-card hero-card-float">
-          <div style="color:var(--text-light);font-size:11px;text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px;">Today's Special</div>
-          <div style="color:white;font-weight:600;font-size:14px;margin-bottom:4px;">🔧 Same-Day Service</div>
-          <div style="color:var(--text-light);font-size:12px;">Most repairs done same day</div>
-          <div style="color:var(--orange-300);font-size:12px;margin-top:8px;font-weight:500;">Call to schedule →</div>
+        <div class="shop-slide" style="background-image:url('images/IMG_2157.jpeg');">
+          <div class="slide-caption">G&M Auto Repair — Open for Business</div>
         </div>
-        <div class="hero-card hero-card-float2">
-          <div style="color:var(--text-light);font-size:11px;text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px;">Warranty</div>
-          <div style="color:var(--navy-300);font-weight:600;font-size:20px;">12 Month</div>
-          <div style="color:var(--text-light);font-size:12px;">All parts & labor</div>
+        <div class="shop-slide" style="background-image:url('images/IMG_2159.jpeg');">
+          <div class="slide-caption">Engine Work — We Handle the Heavy Stuff</div>
         </div>
+        <div class="shop-slide" style="background-image:url('images/IMG_2175.jpeg');">
+          <div class="slide-caption">Inside Our Shop</div>
+        </div>
+        <div class="shop-slide" style="background-image:url('images/Resized_20250329_123104.jpeg');">
+          <div class="slide-caption">Engine Replacement Specialists</div>
+        </div>
+        <div class="slide-dots" id="slideDots"></div>
       </div>
     </div>
   </div>
@@ -124,12 +224,12 @@
     <div class="trust-divider"></div>
     <div class="trust-item">
       <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>
-      Family-Owned Since 1998
+      Family-Owned & Operated
     </div>
     <div class="trust-divider"></div>
     <div class="trust-item">
       <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
-      12-Mo / 12,000-Mi Warranty
+      All Makes & Models
     </div>
     <div class="trust-divider"></div>
     <div class="trust-item">
@@ -147,45 +247,70 @@
         <div class="section-label fade-up"><div class="section-label-line"></div><span>What We Do</span></div>
         <h2 class="section-title fade-up">Complete Auto Care<br/>Under One Roof</h2>
       </div>
-      <p class="section-desc fade-up">From routine oil changes to complex engine work — our ASE-certified team handles every make and model.</p>
+      <p class="section-desc fade-up">From routine oil changes to complex engine work — our team handles every make and model.</p>
     </div>
     <div class="services-grid">
-      <div class="service-card fade-up">
-        <div class="service-icon">🔄</div>
-        <h3>Oil Change & Lube</h3>
-        <p>Full synthetic, conventional, or high-mileage. Quick and thorough — includes a 27-point inspection.</p>
-        <span class="service-price">From $49.95</span>
+
+      <div class="service-card fade-up" style="padding:0;">
+        <img src="images/IMG_2156.jpeg" alt="Engine repair at G&M Auto" class="service-photo" />
+        <div style="padding:24px 28px 28px;">
+          <div class="service-icon" style="margin-top:0;">🔄</div>
+          <h3>Oil Change & Lube</h3>
+          <p>Full synthetic, conventional, or high-mileage. Quick and thorough — includes a multi-point inspection.</p>
+          <span class="service-price">From $49.95</span>
+        </div>
       </div>
-      <div class="service-card fade-up">
-        <div class="service-icon">🛑</div>
-        <h3>Brake Service</h3>
-        <p>Pads, rotors, calipers, and fluid — keeping you safe on Seattle's hills and rainy roads.</p>
-        <span class="service-price">Free Inspection</span>
+
+      <div class="service-card fade-up" style="padding:0;">
+        <img src="images/IMG_2145.jpeg" alt="Brake service" class="service-photo" />
+        <div style="padding:24px 28px 28px;">
+          <div class="service-icon" style="margin-top:0;">🛑</div>
+          <h3>Brake Service</h3>
+          <p>Pads, rotors, calipers, and fluid — keeping you safe on Seattle's hills and rainy roads.</p>
+          <span class="service-price">Free Inspection</span>
+        </div>
       </div>
-      <div class="service-card fade-up">
-        <div class="service-icon">⚙️</div>
-        <h3>Engine Repair</h3>
-        <p>Check engine lights, timing belts, head gaskets — diagnosed right, fixed to last.</p>
-        <span class="service-price">Expert Diagnostics</span>
+
+      <div class="service-card fade-up" style="padding:0;">
+        <img src="images/Resized_20250521_180039.jpeg" alt="Engine repair" class="service-photo" />
+        <div style="padding:24px 28px 28px;">
+          <div class="service-icon" style="margin-top:0;">⚙️</div>
+          <h3>Engine Repair</h3>
+          <p>Check engine lights, timing belts, head gaskets, full engine replacements — diagnosed right, fixed to last.</p>
+          <span class="service-price">Expert Diagnostics</span>
+        </div>
       </div>
-      <div class="service-card fade-up">
-        <div class="service-icon">🔧</div>
-        <h3>Transmission</h3>
-        <p>Automatic and manual service, fluid flushes, clutch replacements, and full rebuilds.</p>
-        <span class="service-price">All Transmissions</span>
+
+      <div class="service-card fade-up" style="padding:0;">
+        <img src="images/Resized_20260128_104630.jpeg" alt="Transmission service" class="service-photo" />
+        <div style="padding:24px 28px 28px;">
+          <div class="service-icon" style="margin-top:0;">🔧</div>
+          <h3>Transmission</h3>
+          <p>Automatic and manual service, fluid flushes, clutch replacements, and full rebuilds.</p>
+          <span class="service-price">All Transmissions</span>
+        </div>
       </div>
-      <div class="service-card fade-up">
-        <div class="service-icon">🚗</div>
-        <h3>Suspension & Alignment</h3>
-        <p>Struts, shocks, tie rods, and precision alignment — crucial for Seattle's winding roads.</p>
-        <span class="service-price">4-Wheel Alignment</span>
+
+      <div class="service-card fade-up" style="padding:0;">
+        <img src="images/IMG_2163.jpeg" alt="Suspension and alignment" class="service-photo" />
+        <div style="padding:24px 28px 28px;">
+          <div class="service-icon" style="margin-top:0;">🚗</div>
+          <h3>Suspension & Alignment</h3>
+          <p>Struts, shocks, tie rods, and precision alignment — crucial for Seattle's winding roads.</p>
+          <span class="service-price">4-Wheel Alignment</span>
+        </div>
       </div>
-      <div class="service-card fade-up">
-        <div class="service-icon">⚡</div>
-        <h3>Electrical & AC</h3>
-        <p>Battery, alternator, AC recharge, heater cores — stay comfortable year-round.</p>
-        <span class="service-price">AC Recharge $89</span>
+
+      <div class="service-card fade-up" style="padding:0;">
+        <img src="images/Resized_20260107_155221.jpeg" alt="Electrical and AC" class="service-photo" />
+        <div style="padding:24px 28px 28px;">
+          <div class="service-icon" style="margin-top:0;">⚡</div>
+          <h3>Electrical & AC</h3>
+          <p>Battery, alternator, AC recharge, heater cores — stay comfortable year-round.</p>
+          <span class="service-price">AC Recharge $89</span>
+        </div>
       </div>
+
     </div>
     <div style="text-align:center;margin-top:40px;">
       <a href="pages/services.html" class="btn-primary" style="display:inline-flex;">View All Services →</a>
@@ -196,32 +321,16 @@
 <!-- PROCESS -->
 <section class="section process-section">
   <div class="section-inner">
-    <div style="text-align:center;margin-bottom:0;">
+    <div style="text-align:center;">
       <div class="section-label fade-up" style="justify-content:center;"><div class="section-label-line"></div><span>How It Works</span></div>
       <h2 class="section-title fade-up" style="text-align:center;">Easy as 1 – 2 – 3 – 4</h2>
       <p class="section-desc fade-up" style="margin:0 auto;text-align:center;">We make car repair stress-free. Here's what to expect from your first call to driving away.</p>
     </div>
     <div class="process-steps">
-      <div class="process-step fade-up">
-        <div class="process-circle">1</div>
-        <h3>Schedule</h3>
-        <p>Call or book online. We'll find a time that works — often same-day or next morning.</p>
-      </div>
-      <div class="process-step fade-up">
-        <div class="process-circle">2</div>
-        <h3>Diagnose</h3>
-        <p>Thorough inspection and a clear written estimate before any work begins.</p>
-      </div>
-      <div class="process-step fade-up">
-        <div class="process-circle">3</div>
-        <h3>Repair</h3>
-        <p>Certified technicians complete the work using quality parts. We'll update you throughout.</p>
-      </div>
-      <div class="process-step fade-up">
-        <div class="process-circle">4</div>
-        <h3>Drive Away</h3>
-        <p>Pick up with confidence — backed by our 12-month/12,000-mile warranty.</p>
-      </div>
+      <div class="process-step fade-up"><div class="process-circle">1</div><h3>Schedule</h3><p>Call or book online. We'll find a time that works — often same-day or next morning.</p></div>
+      <div class="process-step fade-up"><div class="process-circle">2</div><h3>Diagnose</h3><p>Thorough inspection and a clear written estimate before any work begins.</p></div>
+      <div class="process-step fade-up"><div class="process-circle">3</div><h3>Repair</h3><p>Certified technicians complete the work using quality parts. We'll update you throughout.</p></div>
+      <div class="process-step fade-up"><div class="process-circle">4</div><h3>Drive Away</h3><p>Pick up with confidence — backed by our warranty on parts and labor.</p></div>
     </div>
   </div>
 </section>
@@ -234,42 +343,24 @@
         <div class="section-label fade-up"><div class="section-label-line"></div><span>Why Choose Us</span></div>
         <h2 class="section-title fade-up">The G & M Difference</h2>
         <ul class="why-list">
-          <li class="why-item fade-up">
-            <div class="why-num">01</div>
-            <div><div class="why-title">No Surprise Bills. Ever.</div><p class="why-desc">Full written estimate before we touch your car. If something changes, we call you first — always your approval.</p></div>
-          </li>
-          <li class="why-item fade-up">
-            <div class="why-num">02</div>
-            <div><div class="why-title">We Speak Your Language</div><p class="why-desc">Plain English explanations with photos when helpful. No jargon, no upselling on services you don't need.</p></div>
-          </li>
-          <li class="why-item fade-up">
-            <div class="why-num">03</div>
-            <div><div class="why-title">Locally Rooted Since 1998</div><p class="why-desc">25+ years repairing Seattle families' cars. Our reputation is our livelihood — every customer is a neighbor.</p></div>
-          </li>
-          <li class="why-item fade-up">
-            <div class="why-num">04</div>
-            <div><div class="why-title">Backed by Warranty</div><p class="why-desc">Every repair: 12-month / 12,000-mile warranty on parts and labor. If something goes wrong, we make it right.</p></div>
-          </li>
+          <li class="why-item fade-up"><div class="why-num">01</div><div><div class="why-title">No Surprise Bills. Ever.</div><p class="why-desc">Full written estimate before we touch your car. If something changes, we call you first.</p></div></li>
+          <li class="why-item fade-up"><div class="why-num">02</div><div><div class="why-title">We Speak Your Language</div><p class="why-desc">Plain English explanations. No jargon, no upselling on services you don't need.</p></div></li>
+          <li class="why-item fade-up"><div class="why-num">03</div><div><div class="why-title">Locally Rooted</div><p class="why-desc">Repairing Seattle families' cars for years. Every customer is a neighbor.</p></div></li>
+          <li class="why-item fade-up"><div class="why-num">04</div><div><div class="why-title">Quality Work Guaranteed</div><p class="why-desc">Every repair backed by warranty on parts and labor. We make it right.</p></div></li>
         </ul>
       </div>
       <div class="fade-up">
         <div class="why-card">
           <div class="why-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
-          <p class="why-quote">"They treated my 2012 Civic like it was a <strong>brand-new car</strong> worth fixing right."</p>
+          <p class="why-quote">"They treated my car like it was a <strong>brand-new car</strong> worth fixing right. Best shop in Seattle."</p>
           <div class="why-attr">
-            <div class="why-avatar">S</div>
-            <div>
-              <div class="why-name">Sarah M.</div>
-              <div class="why-role">Capitol Hill · Customer since 2019</div>
-            </div>
+            <div class="why-avatar">J</div>
+            <div><div class="why-name">Justin D.</div><div class="why-role">Seattle · Verified Google Review</div></div>
           </div>
         </div>
         <div class="stat-pill">
-          <div class="stat-pill-num">96%</div>
-          <div class="stat-pill-label">
-            <strong>Same-Day Completion</strong>
-            Most repairs finished the day you drop off
-          </div>
+          <div class="stat-pill-num">4.9★</div>
+          <div class="stat-pill-label"><strong>Google Rating</strong>Trusted by Seattle drivers</div>
         </div>
       </div>
     </div>
@@ -287,33 +378,24 @@
       <div class="reviews-rating fade-up">
         <div class="reviews-rating-num">4.9</div>
         <div class="reviews-rating-stars">★★★★★</div>
-        <div class="reviews-rating-count">312 Google Reviews</div>
+        <div class="reviews-rating-count">Google Reviews</div>
       </div>
     </div>
     <div class="reviews-grid">
       <div class="review-card fade-up">
         <div class="review-stars">★★★★★</div>
-        <p class="review-text">"I've been bringing both my cars here for 6 years. Honest, fast, fair. After a dealer quoted me $1,800 for a job G&M did for $480, I'll never go anywhere else."</p>
-        <div class="review-author">
-          <div class="review-initials" style="background:linear-gradient(135deg,#FF6B1A,#FF8C42);">JK</div>
-          <div><div class="review-name">James K.</div><div class="review-location">Ballard · 2 months ago</div></div>
-        </div>
+        <p class="review-text">"They do great work and are very standup people. It's obvious that the owner cares for the working man and has a great crew. For quality work and honest feedback, I would recommend these guys over anyone else!"</p>
+        <div class="review-author"><div class="review-initials" style="background:linear-gradient(135deg,#FF6B1A,#FF8C42);">JD</div><div><div class="review-name">Justin D.</div><div class="review-location">Seattle</div></div></div>
       </div>
       <div class="review-card fade-up">
         <div class="review-stars">★★★★★</div>
-        <p class="review-text">"As a woman who knows nothing about cars, I've always been nervous. G&M was the first shop where I didn't feel talked down to. They showed me photos and explained everything."</p>
-        <div class="review-author">
-          <div class="review-initials" style="background:linear-gradient(135deg,#2563EB,#4DA6FF);">AM</div>
-          <div><div class="review-name">Angela M.</div><div class="review-location">Fremont · 3 weeks ago</div></div>
-        </div>
+        <p class="review-text">"This is a family-owned business and they really care. Fair prices, honest service! This is the place to have your car serviced!"</p>
+        <div class="review-author"><div class="review-initials" style="background:linear-gradient(135deg,#2563EB,#4DA6FF);">LM</div><div><div class="review-name">Les M.</div><div class="review-location">Seattle</div></div></div>
       </div>
       <div class="review-card fade-up">
         <div class="review-stars">★★★★★</div>
-        <p class="review-text">"Dropped my truck off at 8am with a mystery noise. Called by noon with a diagnosis and estimate, done by 3pm. That's how every shop should operate."</p>
-        <div class="review-author">
-          <div class="review-initials" style="background:linear-gradient(135deg,#1A3A6B,#2563EB);">RT</div>
-          <div><div class="review-name">Ryan T.</div><div class="review-location">Georgetown · 1 month ago</div></div>
-        </div>
+        <p class="review-text">"I took my Ford Taurus SHO after having two other mechanics look at it. They were thoughtful, informative and thorough. Got my car back in a timely manner and it is working GREAT!"</p>
+        <div class="review-author"><div class="review-initials" style="background:linear-gradient(135deg,#1A3A6B,#2563EB);">RJ</div><div><div class="review-name">Richard J.</div><div class="review-location">Seattle</div></div></div>
       </div>
     </div>
     <div style="text-align:center;margin-top:40px;">
@@ -322,64 +404,28 @@
   </div>
 </section>
 
-<!-- BOOKING / CONTACT -->
+<!-- BOOKING -->
 <section class="booking-section" id="booking">
   <div class="booking-inner">
     <div class="booking-info">
       <div class="section-label fade-up"><div class="section-label-line"></div><span>Book an Appointment</span></div>
       <h2 class="section-title fade-up">Ready to Bring<br/>Your Car In?</h2>
-      <p class="section-desc fade-up" style="margin-bottom:36px;">Fill in the form and we'll call you within 1 hour to confirm your appointment. Or just call us directly.</p>
-
+      <p class="section-desc fade-up" style="margin-bottom:36px;">Fill in the form and we'll call you to confirm. Or just call us directly.</p>
       <div class="fade-up">
-        <div class="contact-item">
-          <div class="contact-icon">📞</div>
-          <div>
-            <div class="contact-label">Phone</div>
-            <div class="contact-value"><a href="tel:+12065550198" style="color:white;">(206) 555-0198</a></div>
-          </div>
-        </div>
-        <div class="contact-item">
-          <div class="contact-icon">📧</div>
-          <div>
-            <div class="contact-label">Email</div>
-            <div class="contact-value">service@gmfamilyauto.com</div>
-          </div>
-        </div>
-        <div class="contact-item">
-          <div class="contact-icon">📍</div>
-          <div>
-            <div class="contact-label">Address</div>
-            <div class="contact-value">4521 Rainier Ave S<br/>Seattle, WA 98118</div>
-          </div>
-        </div>
-        <div class="contact-item">
-          <div class="contact-icon">🕐</div>
-          <div>
-            <div class="contact-label">Hours</div>
-            <div class="contact-value">Mon–Fri: 8am–6pm<br/>Sat: 8am–4pm · Sun: Closed</div>
-          </div>
-        </div>
+        <div class="contact-item"><div class="contact-icon">📞</div><div><div class="contact-label">Phone</div><div class="contact-value"><a href="tel:+12062443243" style="color:white;">(206) 244-3243</a></div></div></div>
+        <div class="contact-item"><div class="contact-icon">📍</div><div><div class="contact-label">Address</div><div class="contact-value">3757 Rainier Ave S<br/>Seattle, WA</div></div></div>
+        <div class="contact-item"><div class="contact-icon">🕐</div><div><div class="contact-label">Hours</div><div class="contact-value">Mon–Fri: 8am–5pm<br/>Sat & Sun: Closed</div></div></div>
       </div>
     </div>
-
     <div class="booking-form-wrap fade-up" id="bookingFormWrap">
       <div class="form-title">Book an Appointment</div>
       <div class="form-subtitle">We'll confirm within 1 hour. Most appointments available same or next day.</div>
       <form id="bookingForm">
         <div class="form-row">
-          <div class="form-group">
-            <label class="form-label">Your Name *</label>
-            <input type="text" class="form-input" id="b-name" placeholder="Full name" required />
-          </div>
-          <div class="form-group">
-            <label class="form-label">Phone *</label>
-            <input type="tel" class="form-input" id="b-phone" placeholder="(206) 555-0000" required />
-          </div>
+          <div class="form-group"><label class="form-label">Your Name *</label><input type="text" class="form-input" id="b-name" placeholder="Full name" required /></div>
+          <div class="form-group"><label class="form-label">Phone *</label><input type="tel" class="form-input" id="b-phone" placeholder="(206) 555-0000" required /></div>
         </div>
-        <div class="form-group">
-          <label class="form-label">Email</label>
-          <input type="email" class="form-input" id="b-email" placeholder="you@email.com" />
-        </div>
+        <div class="form-group"><label class="form-label">Email</label><input type="email" class="form-input" id="b-email" placeholder="you@email.com" /></div>
         <div class="form-group">
           <label class="form-label">Service Needed *</label>
           <select class="form-select" id="b-service" required>
@@ -394,18 +440,9 @@
             <option>Other / Not Sure</option>
           </select>
         </div>
-        <div class="form-group">
-          <label class="form-label">Vehicle (Year, Make, Model)</label>
-          <input type="text" class="form-input" id="b-vehicle" placeholder="e.g. 2018 Toyota Camry" />
-        </div>
-        <div class="form-group">
-          <label class="form-label">Preferred Date</label>
-          <input type="date" class="form-input" id="b-date" />
-        </div>
-        <div class="form-group">
-          <label class="form-label">Describe the Issue</label>
-          <textarea class="form-textarea" id="b-notes" placeholder="Any noises, warning lights, or symptoms..."></textarea>
-        </div>
+        <div class="form-group"><label class="form-label">Vehicle (Year, Make, Model)</label><input type="text" class="form-input" id="b-vehicle" placeholder="e.g. 2018 Toyota Camry" /></div>
+        <div class="form-group"><label class="form-label">Preferred Date</label><input type="date" class="form-input" id="b-date" /></div>
+        <div class="form-group"><label class="form-label">Describe the Issue</label><textarea class="form-textarea" id="b-notes" placeholder="Any noises, warning lights, or symptoms..."></textarea></div>
         <button type="submit" class="btn-submit" id="bookingSubmitBtn">Request Appointment</button>
       </form>
     </div>
@@ -419,20 +456,16 @@
       <div>
         <div class="nav-logo" style="margin-bottom:16px;">
           <div class="nav-logo-mark">G&M</div>
-          <div class="nav-logo-text">
-            <span class="nav-logo-name">G & M Family Auto</span>
-            <span class="nav-logo-sub">Seattle, Washington</span>
-          </div>
+          <div class="nav-logo-text"><span class="nav-logo-name">G & M Family Auto</span><span class="nav-logo-sub">Seattle, Washington</span></div>
         </div>
-        <p style="color:rgba(180,210,255,0.35);font-size:14px;line-height:1.75;max-width:280px;">Seattle's trusted family-owned auto repair shop since 1998. Honest service, quality work, and a team that cares about getting you back on the road safely.</p>
+        <p style="color:rgba(180,210,255,0.35);font-size:14px;line-height:1.75;max-width:280px;">Seattle's trusted family-owned auto repair shop. Honest service, quality work, and a team that cares about getting you back on the road safely.</p>
         <div class="footer-hours" style="margin-top:24px;">
           <div style="font-size:10px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:rgba(180,210,255,0.25);margin-bottom:12px;">Hours</div>
-          <div class="footer-hour-row"><span class="day">Mon – Fri</span><span>8:00am – 6:00pm</span></div>
-          <div class="footer-hour-row"><span class="day">Saturday</span><span>8:00am – 4:00pm</span></div>
+          <div class="footer-hour-row"><span class="day">Mon – Fri</span><span>8:00am – 5:00pm</span></div>
+          <div class="footer-hour-row"><span class="day">Saturday</span><span style="color:rgba(180,210,255,0.2);">Closed</span></div>
           <div class="footer-hour-row"><span class="day">Sunday</span><span style="color:rgba(180,210,255,0.2);">Closed</span></div>
         </div>
       </div>
-
       <div class="footer-col">
         <h4>Services</h4>
         <ul class="footer-links">
@@ -444,44 +477,56 @@
           <li><a href="pages/services.html">Electrical & AC</a></li>
         </ul>
       </div>
-
       <div class="footer-col">
         <h4>Company</h4>
         <ul class="footer-links">
           <li><a href="pages/about.html">About Us</a></li>
-          <li><a href="pages/about.html">Our Team</a></li>
           <li><a href="pages/reviews.html">Reviews</a></li>
           <li><a href="#booking">Book Appointment</a></li>
-          <li><a href="#services">Warranty Policy</a></li>
         </ul>
       </div>
-
       <div class="footer-col">
         <h4>Contact</h4>
-        <div class="footer-contact">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.9a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .18h3a2 2 0 012 1.72"/></svg>
-          <a href="tel:+12065550198" style="color:rgba(180,210,255,0.5);">(206) 555-0198</a>
-        </div>
-        <div class="footer-contact">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-          service@gmfamilyauto.com
-        </div>
-        <div class="footer-contact">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          4521 Rainier Ave S<br/>Seattle, WA 98118
-        </div>
+        <div class="footer-contact"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07"/></svg><a href="tel:+12062443243" style="color:rgba(180,210,255,0.5);">(206) 244-3243</a></div>
+        <div class="footer-contact"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>3757 Rainier Ave S, Seattle, WA</div>
       </div>
     </div>
-
     <div class="footer-bottom">
       <p>© 2025 G & M Family Auto Repair. All rights reserved.</p>
-      <p>ASE Certified · BBB Accredited · Proudly serving Seattle since 1998</p>
+      <p>Proudly serving Seattle 🚗</p>
     </div>
   </div>
 </footer>
 
 <div class="toast" id="toast"><span>✅</span><span class="toast-msg">Done!</span></div>
-
 <script src="js/main.js"></script>
+<script>
+// Slideshow
+(function() {
+  var slides = document.querySelectorAll('.shop-slide');
+  var dotsContainer = document.getElementById('slideDots');
+  var current = 0;
+
+  // Build dots
+  slides.forEach(function(_, i) {
+    var dot = document.createElement('div');
+    dot.className = 'slide-dot' + (i === 0 ? ' active' : '');
+    dot.addEventListener('click', function() { goTo(i); });
+    dotsContainer.appendChild(dot);
+  });
+
+  function goTo(n) {
+    slides[current].classList.remove('active');
+    dotsContainer.children[current].classList.remove('active');
+    current = n;
+    slides[current].classList.add('active');
+    dotsContainer.children[current].classList.add('active');
+  }
+
+  setInterval(function() {
+    goTo((current + 1) % slides.length);
+  }, 4000);
+})();
+</script>
 </body>
 </html>
