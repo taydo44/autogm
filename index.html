@@ -4,479 +4,108 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>G & M Family Auto Repair — Seattle, WA</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Outfit:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --navy:       #050D1A;
-      --navy-mid:   #0A1628;
-      --navy-light: #112240;
-      --navy-card:  #0D1B35;
-      --blue:       #1A3A6B;
-      --blue-bright:#2563EB;
-      --electric:   #4DA6FF;
-      --orange:     #FF6B1A;
-      --orange-hot: #FF8C42;
-      --orange-glow:#FFB347;
-      --white:      #F0F6FF;
-      --muted:      rgba(180,210,255,0.45);
-      --serif:      'Cormorant Garamond', Georgia, serif;
-      --sans:       'Outfit', sans-serif;
-      --mono:       'Space Mono', monospace;
-    }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      background: var(--navy);
-      color: var(--white);
-      font-family: var(--sans);
-      font-weight: 400;
-      line-height: 1.6;
-      overflow-x: hidden;
-    }
-
-    body::after {
-      content: '';
-      position: fixed; inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
-      pointer-events: none; z-index: 9998; opacity: 0.55; mix-blend-mode: overlay;
-    }
-
-    .aurora { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
-    .aurora-orb { position: absolute; border-radius: 50%; filter: blur(120px); animation: drift 18s ease-in-out infinite; }
-    .aurora-orb:nth-child(1) { width:600px;height:600px;background:var(--blue-bright);top:-200px;left:-100px;opacity:.14;animation-delay:0s; }
-    .aurora-orb:nth-child(2) { width:500px;height:500px;background:var(--orange);top:30%;right:-150px;opacity:.1;animation-delay:-6s; }
-    .aurora-orb:nth-child(3) { width:400px;height:400px;background:var(--electric);bottom:10%;left:20%;opacity:.08;animation-delay:-12s; }
-    @keyframes drift { 0%,100%{transform:translate(0,0) scale(1)} 33%{transform:translate(40px,-30px) scale(1.05)} 66%{transform:translate(-20px,20px) scale(0.95)} }
-
-    /* NAV */
-    nav {
-      position:fixed; top:0; left:0; right:0; z-index:200;
-      padding:0 48px; height:72px;
-      display:flex; align-items:center; justify-content:space-between;
-      background:rgba(5,13,26,.88); backdrop-filter:blur(20px);
-      border-bottom:1px solid rgba(77,166,255,.12);
-      animation: slideDown .7s cubic-bezier(.16,1,.3,1) both;
-    }
-    @keyframes slideDown { from{transform:translateY(-100%);opacity:0} to{transform:translateY(0);opacity:1} }
-    .nav-logo { display:flex; align-items:center; gap:12px; text-decoration:none; }
-    .nav-badge {
-      width:40px; height:40px; border-radius:8px;
-      background:linear-gradient(135deg,var(--orange),var(--orange-hot));
-      display:flex; align-items:center; justify-content:center;
-      font-family:var(--serif); font-size:15px; font-weight:700; color:white;
-      box-shadow:0 0 20px rgba(255,107,26,.45);
-    }
-    .nav-name { font-family:var(--serif); font-size:18px; color:var(--white); }
-    .nav-sub  { font-family:var(--mono); font-size:9px; color:var(--electric); letter-spacing:3px; text-transform:uppercase; opacity:.65; margin-top:1px; }
-    .nav-links { display:flex; align-items:center; gap:36px; list-style:none; }
-    .nav-links a { text-decoration:none; color:rgba(180,210,255,.6); font-size:13px; font-weight:500; letter-spacing:.5px; transition:color .2s; }
-    .nav-links a:hover { color:var(--orange-hot); }
-    .nav-cta {
-      background:linear-gradient(135deg,var(--orange),var(--orange-hot)) !important;
-      color:white !important; padding:9px 22px; border-radius:6px;
-      font-weight:600 !important; box-shadow:0 4px 20px rgba(255,107,26,.35);
-      transition:box-shadow .2s,transform .15s !important;
-    }
-    .nav-cta:hover { box-shadow:0 6px 32px rgba(255,107,26,.6) !important; transform:translateY(-1px); }
-
-    /* HERO */
-    .hero {
-      min-height:100vh; padding:72px 48px 0;
-      display:grid; grid-template-columns:1fr 1fr;
-      align-items:center; gap:60px;
-      max-width:1280px; margin:0 auto; position:relative; z-index:1;
-    }
-    .hero-content { padding-top:40px; }
-    .hero-eyebrow {
-      display:inline-flex; align-items:center; gap:10px;
-      font-family:var(--mono); font-size:10px; letter-spacing:4px; text-transform:uppercase;
-      color:var(--electric); margin-bottom:24px;
-      animation:fadeUp .8s .2s ease both;
-    }
-    .hero-eyebrow::before { content:''; width:30px; height:1px; background:var(--electric); }
-    .hero h1 {
-      font-family:var(--serif); font-size:clamp(48px,5.5vw,78px);
-      line-height:1.05; font-weight:600; color:var(--white); margin-bottom:24px;
-      animation:fadeUp .8s .35s ease both;
-    }
-    .hero h1 em { font-style:italic; color:var(--orange-hot); }
-    .hero-sub { font-size:17px; color:var(--muted); line-height:1.75; max-width:460px; margin-bottom:44px; animation:fadeUp .8s .5s ease both; }
-    .hero-actions { display:flex; gap:14px; flex-wrap:wrap; animation:fadeUp .8s .65s ease both; }
-
-    .btn-orange {
-      background:linear-gradient(135deg,var(--orange),var(--orange-hot));
-      color:white; padding:15px 30px; border-radius:6px;
-      font-size:15px; font-weight:600; text-decoration:none;
-      display:inline-flex; align-items:center; gap:8px;
-      box-shadow:0 6px 30px rgba(255,107,26,.4);
-      transition:transform .15s,box-shadow .2s;
-    }
-    .btn-orange:hover { transform:translateY(-2px); box-shadow:0 10px 40px rgba(255,107,26,.6); }
-    .btn-glass {
-      background:rgba(77,166,255,.08); color:var(--electric);
-      padding:15px 30px; border-radius:6px; font-size:15px; font-weight:500;
-      text-decoration:none; border:1px solid rgba(77,166,255,.25);
-      display:inline-flex; align-items:center; gap:8px;
-      transition:background .2s,border-color .2s;
-    }
-    .btn-glass:hover { background:rgba(77,166,255,.16); border-color:rgba(77,166,255,.5); }
-
-    .hero-stats {
-      display:flex; gap:44px; margin-top:56px; padding-top:36px;
-      border-top:1px solid rgba(77,166,255,.1);
-      animation:fadeUp .8s .8s ease both;
-    }
-    .stat-num { font-family:var(--serif); font-size:42px; color:var(--orange-hot); line-height:1; font-weight:600; }
-    .stat-lbl { font-size:11px; color:var(--muted); font-weight:500; letter-spacing:1px; margin-top:6px; text-transform:uppercase; }
-
-    /* HERO VISUAL */
-    .hero-visual { animation:fadeIn 1.2s .4s ease both; position:relative; z-index:1; }
-    .hero-card {
-      background:linear-gradient(145deg,var(--navy-card),var(--navy-light));
-      border:1px solid rgba(77,166,255,.15); border-radius:20px; overflow:hidden;
-      position:relative; aspect-ratio:4/5;
-      display:flex; flex-direction:column; justify-content:flex-end; padding:32px;
-      box-shadow:0 40px 80px rgba(0,0,0,.6), inset 0 1px 0 rgba(77,166,255,.1);
-    }
-    .hero-card-glow {
-      position:absolute; inset:0;
-      background:
-        radial-gradient(ellipse at 25% 15%,rgba(37,99,235,.25) 0%,transparent 55%),
-        radial-gradient(ellipse at 85% 85%,rgba(255,107,26,.2) 0%,transparent 50%);
-    }
-    .hero-car-svg { position:absolute; top:50%; left:50%; transform:translate(-50%,-62%); width:88%; }
-    .hero-card-info { position:relative; z-index:2; }
-    .hero-badge {
-      background:linear-gradient(135deg,var(--orange),var(--orange-hot));
-      color:white; font-size:10px; font-weight:700; letter-spacing:2.5px; text-transform:uppercase;
-      padding:6px 14px; border-radius:4px; display:inline-block; margin-bottom:12px;
-      box-shadow:0 4px 16px rgba(255,107,26,.4);
-    }
-    .hero-card-title { font-family:var(--serif); font-size:24px; color:white; line-height:1.3; font-weight:600; }
-    .hero-card-meta { display:flex; align-items:center; gap:8px; margin-top:8px; font-size:13px; color:rgba(180,210,255,.5); }
-    .ftag {
-      position:absolute; background:rgba(5,13,26,.94); border:1px solid rgba(77,166,255,.2);
-      border-radius:12px; padding:12px 16px; box-shadow:0 8px 32px rgba(0,0,0,.4);
-      display:flex; align-items:center; gap:10px; font-size:13px; font-weight:600; color:var(--white);
-      backdrop-filter:blur(12px); animation:float 4s ease-in-out infinite;
-    }
-    .ftag.t1 { top:24px; right:-20px; animation-delay:0s; }
-    .ftag.t2 { bottom:130px; left:-26px; animation-delay:2s; }
-    @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-7px)} }
-    .tico { width:32px; height:32px; border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:16px; }
-    .tsub { font-size:11px; color:var(--muted); font-weight:400; }
-
-    @keyframes fadeUp { from{opacity:0;transform:translateY(28px)} to{opacity:1;transform:translateY(0)} }
-    @keyframes fadeIn { from{opacity:0} to{opacity:1} }
-
-    /* TRUST BAR */
-    .trust-bar {
-      position:relative; z-index:1;
-      background:rgba(10,22,40,.9);
-      border-top:1px solid rgba(77,166,255,.1); border-bottom:1px solid rgba(77,166,255,.1);
-      padding:22px 48px;
-    }
-    .trust-inner { max-width:1280px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; gap:20px; flex-wrap:wrap; }
-    .titem { display:flex; align-items:center; gap:10px; color:rgba(180,210,255,.55); font-size:13px; font-weight:500; }
-    .titem svg { color:var(--orange-hot); flex-shrink:0; }
-    .tdiv { width:1px; height:22px; background:rgba(77,166,255,.12); }
-
-    /* SECTIONS */
-    section { padding:110px 48px; position:relative; z-index:1; }
-    .si { max-width:1280px; margin:0 auto; }
-    .stag {
-      font-family:var(--mono); font-size:10px; letter-spacing:3.5px; text-transform:uppercase;
-      color:var(--orange-hot); display:flex; align-items:center; gap:10px; margin-bottom:16px;
-    }
-    .stag::before { content:''; width:22px; height:1px; background:var(--orange-hot); }
-    .stitle { font-family:var(--serif); font-size:clamp(34px,3.5vw,52px); line-height:1.1; color:var(--white); margin-bottom:16px; font-weight:600; }
-    .sdesc { font-size:16px; color:var(--muted); line-height:1.75; max-width:520px; }
-
-    /* ═══ SHATTER CARDS ═══ */
-    .services { background:var(--navy-mid); }
-    .svcs-hdr { display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:64px; gap:40px; flex-wrap:wrap; }
-    .svcs-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
-
-    .sc-wrap {
-      position:relative; border-radius:16px; overflow:hidden; cursor:pointer;
-    }
-    .sc {
-      background:linear-gradient(145deg,var(--navy-card),rgba(17,34,64,.95));
-      border:1px solid rgba(77,166,255,.12);
-      padding:36px 32px; border-radius:16px;
-      position:relative; z-index:2;
-      transition:transform .3s ease;
-    }
-    .sc::before {
-      content:''; position:absolute; top:0; left:0; right:0; height:1px;
-      background:linear-gradient(90deg,transparent,rgba(77,166,255,.4),transparent);
-    }
-    .sc-wrap:hover .sc { transform:scale(0.965); }
-
-    .sc-canvas {
-      position:absolute; inset:0; width:100%; height:100%;
-      border-radius:16px; z-index:10; pointer-events:none; opacity:0;
-    }
-    .sc-icon {
-      width:54px; height:54px;
-      background:rgba(255,107,26,.1); border:1px solid rgba(255,107,26,.2);
-      border-radius:12px; display:flex; align-items:center; justify-content:center;
-      margin-bottom:20px; transition:background .3s,box-shadow .3s;
-    }
-    .sc-wrap:hover .sc-icon { background:rgba(255,107,26,.22); box-shadow:0 0 22px rgba(255,107,26,.32); }
-    .sc h3 { font-family:var(--serif); font-size:22px; color:var(--white); margin-bottom:10px; font-weight:600; }
-    .sc p  { font-size:14px; color:var(--muted); line-height:1.65; }
-    .sc-pill {
-      display:inline-block; margin-top:18px;
-      font-size:10px; font-weight:700; letter-spacing:2px; text-transform:uppercase;
-      color:var(--orange-hot); background:rgba(255,107,26,.1);
-      border:1px solid rgba(255,107,26,.25); border-radius:20px; padding:4px 12px;
-    }
-
-    /* WHY */
-    .why-grid { display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center; }
-    .why-list { list-style:none; display:flex; flex-direction:column; gap:28px; margin-top:40px; }
-    .witem { display:flex; gap:20px; align-items:flex-start; }
-    .wnum { font-family:var(--serif); font-size:38px; color:var(--orange-hot); opacity:.2; line-height:1; flex-shrink:0; width:38px; font-weight:700; }
-    .wt { font-weight:600; font-size:16px; color:var(--white); margin-bottom:5px; }
-    .wd { font-size:14px; color:var(--muted); line-height:1.65; }
-    .why-card {
-      background:linear-gradient(145deg,var(--navy-card),var(--navy-light));
-      border:1px solid rgba(77,166,255,.12); border-radius:20px; padding:48px;
-      position:relative; overflow:hidden; box-shadow:0 30px 60px rgba(0,0,0,.4);
-    }
-    .why-card::before { content:''; position:absolute; top:-80px; right:-80px; width:280px; height:280px; background:radial-gradient(circle,rgba(255,107,26,.25),transparent 70%); }
-    .why-card::after  { content:''; position:absolute; bottom:-40px; left:-40px; width:200px; height:200px; background:radial-gradient(circle,rgba(37,99,235,.2),transparent 70%); }
-    .wstars { display:flex; gap:4px; margin-bottom:20px; position:relative; z-index:1; }
-    .wstars span { color:var(--orange-glow); font-size:20px; }
-    .wquote { font-family:var(--serif); font-size:28px; color:var(--white); line-height:1.4; position:relative; z-index:1; font-style:italic; }
-    .wquote strong { font-style:normal; color:var(--orange-hot); }
-    .wattr { margin-top:30px; display:flex; align-items:center; gap:14px; position:relative; z-index:1; }
-    .wavatar {
-      width:46px; height:46px; border-radius:50%;
-      background:linear-gradient(135deg,var(--orange),var(--blue-bright));
-      display:flex; align-items:center; justify-content:center;
-      font-family:var(--serif); font-size:18px; color:white; font-weight:700;
-    }
-    .wan { font-weight:600; color:var(--white); font-size:14px; }
-    .war { font-size:12px; color:var(--muted); }
-    .stat-pill {
-      background:rgba(77,166,255,.06); border:1px solid rgba(77,166,255,.12);
-      border-radius:14px; padding:24px 28px;
-      display:flex; gap:18px; align-items:center; margin-top:18px;
-    }
-    .sp-num { font-family:var(--serif); font-size:44px; color:var(--electric); line-height:1; font-weight:700; }
-    .sp-lbl { font-size:13px; color:var(--muted); }
-    .sp-lbl strong { display:block; font-size:15px; color:var(--white); font-weight:600; margin-bottom:3px; }
-
-    /* REVIEWS */
-    .reviews { background:rgba(10,22,40,.8); }
-    .reviews-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:22px; margin-top:60px; }
-    .rev-card {
-      background:linear-gradient(145deg,var(--navy-card),var(--navy-light));
-      border:1px solid rgba(77,166,255,.1); border-radius:16px; padding:32px;
-      position:relative; overflow:hidden;
-    }
-    .rev-card::before { content:''; position:absolute; top:0; left:0; right:0; height:1px; background:linear-gradient(90deg,transparent,rgba(255,107,26,.4),transparent); }
-    .rstars { display:flex; gap:3px; margin-bottom:16px; }
-    .rstars span { color:var(--orange-glow); font-size:15px; }
-    .rtext { font-size:15px; color:var(--muted); line-height:1.75; margin-bottom:24px; font-style:italic; }
-    .rauth { display:flex; align-items:center; gap:12px; }
-    .rinit { width:42px; height:42px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:14px; color:white; flex-shrink:0; }
-    .rname { font-weight:600; font-size:14px; color:var(--white); }
-    .rloc  { font-size:12px; color:var(--muted); }
-
-    /* PROCESS */
-    .proc-steps { display:grid; grid-template-columns:repeat(4,1fr); gap:0; margin-top:64px; position:relative; }
-    .proc-steps::before {
-      content:''; position:absolute; top:28px;
-      left:calc(12.5% + 22px); right:calc(12.5% + 22px); height:1px;
-      background:repeating-linear-gradient(90deg,rgba(77,166,255,.4) 0,rgba(77,166,255,.4) 8px,transparent 8px,transparent 16px);
-    }
-    .pstep { text-align:center; padding:0 20px; }
-    .pcircle {
-      width:56px; height:56px; border-radius:50%;
-      background:linear-gradient(135deg,var(--orange),var(--orange-hot));
-      color:white; font-family:var(--serif); font-size:22px; font-weight:700;
-      display:flex; align-items:center; justify-content:center;
-      margin:0 auto 22px; position:relative; z-index:1;
-      box-shadow:0 0 30px rgba(255,107,26,.4);
-    }
-    .pstep h3 { font-family:var(--serif); font-size:19px; color:var(--white); margin-bottom:10px; font-weight:600; }
-    .pstep p  { font-size:13px; color:var(--muted); line-height:1.65; }
-
-    /* ABOUT */
-    .about-grid { display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center; }
-    .about-vis {
-      background:linear-gradient(145deg,var(--navy-card),var(--navy-light));
-      border:1px solid rgba(77,166,255,.12); border-radius:20px;
-      aspect-ratio:4/3; display:flex; align-items:center; justify-content:center;
-      position:relative; overflow:hidden;
-    }
-    .about-vis::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse at 40% 60%,rgba(37,99,235,.2),transparent 70%); }
-    .about-year {
-      position:absolute; top:20px; right:20px;
-      background:linear-gradient(135deg,var(--orange),var(--orange-hot));
-      border-radius:10px; padding:16px 20px; text-align:center;
-      box-shadow:0 8px 30px rgba(255,107,26,.4);
-    }
-    .ay-num { font-family:var(--serif); font-size:30px; color:white; line-height:1; font-weight:700; }
-    .ay-lbl { font-size:9px; color:rgba(255,255,255,.7); text-transform:uppercase; letter-spacing:2px; margin-top:3px; }
-    .atext { font-size:16px; color:var(--muted); line-height:1.8; margin-top:24px; }
-    .avals { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:36px; }
-    .aval { background:rgba(77,166,255,.04); border:1px solid rgba(77,166,255,.1); border-radius:12px; padding:18px; }
-    .aval-ic { font-size:22px; margin-bottom:8px; }
-    .aval h4 { font-size:14px; font-weight:600; color:var(--white); margin-bottom:4px; }
-    .aval p  { font-size:12px; color:var(--muted); line-height:1.5; }
-
-    /* CTA */
-    .cta {
-      background:linear-gradient(135deg,rgba(255,107,26,.15) 0%,rgba(37,99,235,.15) 100%);
-      border-top:1px solid rgba(255,107,26,.2); border-bottom:1px solid rgba(37,99,235,.2);
-      padding:90px 48px; text-align:center; position:relative; z-index:1;
-    }
-    .cta::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse at 50% 0%,rgba(255,107,26,.12),transparent 60%); }
-    .cta h2 { font-family:var(--serif); font-size:clamp(34px,4vw,56px); color:var(--white); margin-bottom:16px; font-weight:600; position:relative; }
-    .cta > p { font-size:17px; color:var(--muted); margin-bottom:44px; position:relative; }
-    .cta-btns { display:flex; gap:14px; justify-content:center; flex-wrap:wrap; position:relative; }
-    .cta-meta { margin-top:52px; display:flex; gap:44px; justify-content:center; flex-wrap:wrap; position:relative; }
-    .cmeta { display:flex; align-items:center; gap:8px; font-size:14px; color:rgba(180,210,255,.5); }
-    .cmeta svg { color:var(--electric); }
-
-    /* FOOTER */
-    footer { background:#030810; padding:70px 48px 32px; position:relative; z-index:1; }
-    .fi { max-width:1280px; margin:0 auto; }
-    .ftop { display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:60px; padding-bottom:52px; border-bottom:1px solid rgba(77,166,255,.07); }
-    .fname { font-family:var(--serif); font-size:20px; color:var(--white); margin-bottom:14px; }
-    .fbrand p { font-size:14px; color:rgba(180,210,255,.35); line-height:1.75; }
-    .fhr { display:flex; justify-content:space-between; font-size:13px; padding:6px 0; border-bottom:1px solid rgba(77,166,255,.06); color:rgba(180,210,255,.5); }
-    .fhr .day { color:rgba(180,210,255,.3); }
-    .fcol h4 { font-size:10px; font-weight:600; letter-spacing:2.5px; text-transform:uppercase; color:rgba(180,210,255,.3); margin-bottom:20px; }
-    .flinks { list-style:none; display:flex; flex-direction:column; gap:11px; }
-    .flinks a { text-decoration:none; font-size:14px; color:rgba(180,210,255,.5); transition:color .2s; }
-    .flinks a:hover { color:var(--orange-hot); }
-    .fcon { display:flex; gap:10px; font-size:14px; color:rgba(180,210,255,.5); margin-bottom:12px; }
-    .fcon svg { color:var(--orange); flex-shrink:0; margin-top:2px; }
-    .fbot { display:flex; justify-content:space-between; padding-top:30px; flex-wrap:wrap; gap:10px; }
-    .fbot p { font-size:13px; color:rgba(180,210,255,.2); }
-
-    /* REVEAL */
-    .reveal { opacity:0; transform:translateY(32px); transition:opacity .75s ease,transform .75s ease; }
-    .reveal.visible { opacity:1; transform:translateY(0); }
-
-    /* RESPONSIVE */
-    @media (max-width:960px) {
-      nav { padding:0 20px; }
-      .nav-links { display:none; }
-      .hero { grid-template-columns:1fr; padding:90px 20px 40px; gap:40px; }
-      .hero-visual { order:-1; }
-      .hero-card { aspect-ratio:16/9; }
-      .ftag.t1 { right:8px; } .ftag.t2 { left:8px; }
-      section { padding:70px 20px; }
-      .svcs-grid { grid-template-columns:1fr 1fr; }
-      .why-grid, .about-grid { grid-template-columns:1fr; gap:40px; }
-      .reviews-grid { grid-template-columns:1fr; }
-      .proc-steps { grid-template-columns:1fr 1fr; gap:30px; }
-      .proc-steps::before { display:none; }
-      .ftop { grid-template-columns:1fr 1fr; gap:40px; }
-      .cta,.cta + * { padding-left:20px; padding-right:20px; }
-      footer { padding:60px 20px 28px; }
-    }
-    @media (max-width:560px) { .svcs-grid { grid-template-columns:1fr; } .avals { grid-template-columns:1fr; } }
-  </style>
+  <meta name="description" content="Seattle's trusted family-owned auto repair shop since 1998. ASE-certified technicians, honest pricing, 12-month warranty. Call (206) 555-0198." />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔧</text></svg>" />
 </head>
 <body>
 
-<div class="aurora" aria-hidden="true">
-  <div class="aurora-orb"></div>
-  <div class="aurora-orb"></div>
-  <div class="aurora-orb"></div>
-</div>
-
-<!-- NAV -->
-<nav>
-  <a href="#" class="nav-logo">
-    <div class="nav-badge">G&M</div>
-    <div><div class="nav-name">G & M Family Auto</div><div class="nav-sub">Seattle, Washington</div></div>
-  </a>
-  <ul class="nav-links">
-    <li><a href="#services">Services</a></li>
-    <li><a href="#about">About</a></li>
-    <li><a href="#reviews">Reviews</a></li>
-    <li><a href="#contact">Contact</a></li>
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar">
+  <div class="nav-logo">
+    <div class="nav-logo-mark">G&M</div>
+    <div class="nav-logo-text">
+      <span class="nav-logo-name">G & M Family Auto</span>
+      <span class="nav-logo-sub">Seattle, Washington</span>
+    </div>
+  </div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index.html" class="active">Home</a></li>
+    <li><a href="pages/services.html">Services</a></li>
+    <li><a href="pages/about.html">About</a></li>
+    <li><a href="pages/reviews.html">Reviews</a></li>
+    <li><a href="#booking">Book Appointment</a></li>
     <li><a href="tel:+12065550198" class="nav-cta">📞 (206) 555-0198</a></li>
   </ul>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
 
 <!-- HERO -->
-<section style="padding:0;background:transparent;">
-  <div class="hero">
-    <div class="hero-content">
-      <div class="hero-eyebrow">Seattle's Trusted Auto Shop</div>
-      <h1>Your Car Deserves<br/><em>Family Care</em></h1>
-      <p class="hero-sub">Honest diagnostics, transparent pricing, and repairs done right — by Seattle neighbors who treat your car like their own since 1998.</p>
-      <div class="hero-actions">
-        <a href="tel:+12065550198" class="btn-orange">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.9a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .18h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
-          Call Us Now
+<section style="padding:0;background:transparent;position:relative;z-index:1;">
+  <div class="hero-content">
+    <div class="hero-left">
+      <div class="hero-badge fade-up">
+        <div class="hero-badge-dot"></div>
+        <span>Seattle's Trusted Auto Shop Since 1998</span>
+      </div>
+      <h1 class="hero-title fade-up">
+        Your Car Deserves<br/><span class="accent">Family Care</span>
+      </h1>
+      <p class="hero-desc fade-up">
+        Honest diagnostics, transparent pricing, and repairs done right — by Seattle neighbors who treat your car like their own for over 25 years.
+      </p>
+      <div class="hero-actions fade-up">
+        <a href="tel:+12065550198" class="btn-primary">
+          📞 Call Us Now
         </a>
-        <a href="#services" class="btn-glass">
-          View All Services
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        <a href="#booking" class="btn-outline">
+          Book Appointment →
         </a>
       </div>
-      <div class="hero-stats">
-        <div><div class="stat-num">25+</div><div class="stat-lbl">Years in Seattle</div></div>
-        <div><div class="stat-num">8k+</div><div class="stat-lbl">Cars Repaired</div></div>
-        <div><div class="stat-num">4.9★</div><div class="stat-lbl">Google Rating</div></div>
+      <div class="hero-stats fade-up">
+        <div>
+          <div class="hero-stat-num" data-count="25" data-suffix="+">0+</div>
+          <div class="hero-stat-label">Years in Seattle</div>
+        </div>
+        <div>
+          <div class="hero-stat-num" data-count="8000" data-suffix="+">0+</div>
+          <div class="hero-stat-label">Cars Repaired</div>
+        </div>
+        <div>
+          <div class="hero-stat-num">4.9★</div>
+          <div class="hero-stat-label">Google Rating</div>
+        </div>
       </div>
     </div>
     <div class="hero-visual">
-      <div class="hero-card">
-        <div class="hero-card-glow"></div>
-        <svg class="hero-car-svg" viewBox="0 0 340 180" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="0" y="155" width="340" height="25" fill="#0a0f1a" rx="3"/>
-          <rect x="40" y="163" width="40" height="5" fill="#FF6B1A" rx="2" opacity=".6"/>
-          <rect x="150" y="163" width="40" height="5" fill="#FF6B1A" rx="2" opacity=".6"/>
-          <rect x="260" y="163" width="40" height="5" fill="#FF6B1A" rx="2" opacity=".6"/>
-          <rect x="40" y="100" width="260" height="58" fill="#1A3A6B" rx="8"/>
-          <path d="M90 100 C105 70, 130 55, 165 52 L210 52 C240 52 255 68 268 100Z" fill="#112240"/>
-          <path d="M105 98 C115 76, 132 64, 162 61 L185 61 C190 61, 195 65, 200 72 L205 98Z" fill="#4DA6FF" opacity=".6"/>
-          <path d="M210 98 L215 72 C220 64, 228 61, 240 61 L255 61 C262 66, 267 78, 268 98Z" fill="#4DA6FF" opacity=".6"/>
-          <line x1="207" y1="61" x2="209" y2="98" stroke="#0D1B35" stroke-width="4"/>
-          <circle cx="105" cy="158" r="24" fill="#050D1A"/>
-          <circle cx="105" cy="158" r="16" fill="#0A1628"/>
-          <circle cx="105" cy="158" r="8" fill="#1A3A6B"/>
-          <circle cx="105" cy="158" r="3" fill="#FF6B1A"/>
-          <circle cx="235" cy="158" r="24" fill="#050D1A"/>
-          <circle cx="235" cy="158" r="16" fill="#0A1628"/>
-          <circle cx="235" cy="158" r="8" fill="#1A3A6B"/>
-          <circle cx="235" cy="158" r="3" fill="#FF6B1A"/>
-          <rect x="292" y="110" width="14" height="10" fill="#FFB347" rx="3" opacity=".95"/>
-          <rect x="294" y="125" width="10" height="7" fill="#FFB347" rx="2" opacity=".7"/>
-          <rect x="34" y="110" width="10" height="10" fill="#FF4444" rx="2" opacity=".9"/>
-          <line x1="170" y1="103" x2="170" y2="155" stroke="#112240" stroke-width="2.5"/>
-          <rect x="145" y="128" width="18" height="5" fill="#112240" rx="2"/>
-          <rect x="180" y="128" width="18" height="5" fill="#112240" rx="2"/>
-          <ellipse cx="200" cy="78" rx="28" ry="5" fill="white" opacity=".06" transform="rotate(-18,200,78)"/>
-          <circle cx="290" cy="48" r="18" fill="rgba(255,107,26,.12)" stroke="rgba(255,107,26,.3)" stroke-width="1"/>
-          <text x="290" y="54" text-anchor="middle" font-size="18" fill="#FF8C42">🔧</text>
-        </svg>
-        <div class="hero-card-info">
-          <div class="hero-badge">ASE Certified</div>
-          <div class="hero-card-title">Family Owned &amp;<br/>Seattle Proud</div>
-          <div class="hero-card-meta">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-            Seattle, Washington
+      <div class="hero-card-stack">
+        <div class="hero-card hero-card-main">
+          <div class="hero-card-badge">ASE Certified</div>
+          <div class="hero-card-title">Family Owned &<br/>Seattle Proud</div>
+          <div class="hero-card-desc">George & Maria Vasquez · Est. 1998 · South Seattle</div>
+          <div class="hero-card-metrics">
+            <div class="metric-box">
+              <div class="metric-val">4.9★</div>
+              <div class="metric-label">Google Rating</div>
+            </div>
+            <div class="metric-box">
+              <div class="metric-val">312</div>
+              <div class="metric-label">Reviews</div>
+            </div>
+            <div class="metric-box">
+              <div class="metric-val">12mo</div>
+              <div class="metric-label">Warranty</div>
+            </div>
+            <div class="metric-box">
+              <div class="metric-val" style="color:var(--navy-300);">Open</div>
+              <div class="metric-label">Mon–Sat</div>
+            </div>
           </div>
         </div>
+        <div class="hero-card hero-card-float">
+          <div style="color:var(--text-light);font-size:11px;text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px;">Today's Special</div>
+          <div style="color:white;font-weight:600;font-size:14px;margin-bottom:4px;">🔧 Same-Day Service</div>
+          <div style="color:var(--text-light);font-size:12px;">Most repairs done same day</div>
+          <div style="color:var(--orange-300);font-size:12px;margin-top:8px;font-weight:500;">Call to schedule →</div>
+        </div>
+        <div class="hero-card hero-card-float2">
+          <div style="color:var(--text-light);font-size:11px;text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px;">Warranty</div>
+          <div style="color:var(--navy-300);font-weight:600;font-size:20px;">12 Month</div>
+          <div style="color:var(--text-light);font-size:12px;">All parts & labor</div>
+        </div>
       </div>
-      <div class="ftag t1"><div class="tico" style="background:rgba(255,107,26,.12);">🕐</div><div><div>Same-Day Service</div><div class="tsub">Most repairs</div></div></div>
-      <div class="ftag t2"><div class="tico" style="background:rgba(77,166,255,.12);">✓</div><div><div>12-Month Warranty</div><div class="tsub">All repairs</div></div></div>
     </div>
   </div>
 </section>
@@ -484,131 +113,164 @@
 <!-- TRUST BAR -->
 <div class="trust-bar">
   <div class="trust-inner">
-    <div class="titem"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>ASE Certified Technicians</div>
-    <div class="tdiv"></div>
-    <div class="titem"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Free Diagnostic Estimates</div>
-    <div class="tdiv"></div>
-    <div class="titem"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>Family-Owned Since 1998</div>
-    <div class="tdiv"></div>
-    <div class="titem"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>12-Mo / 12,000-Mi Warranty</div>
-    <div class="tdiv"></div>
-    <div class="titem"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>Transparent Pricing Always</div>
+    <div class="trust-item">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      ASE Certified Technicians
+    </div>
+    <div class="trust-divider"></div>
+    <div class="trust-item">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      Free Diagnostic Estimates
+    </div>
+    <div class="trust-divider"></div>
+    <div class="trust-item">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>
+      Family-Owned Since 1998
+    </div>
+    <div class="trust-divider"></div>
+    <div class="trust-item">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+      12-Mo / 12,000-Mi Warranty
+    </div>
+    <div class="trust-divider"></div>
+    <div class="trust-item">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+      Transparent Pricing Always
+    </div>
   </div>
 </div>
 
-<!-- SERVICES -->
-<section class="services" id="services">
-  <div class="si">
-    <div class="svcs-hdr">
-      <div><div class="stag">What We Do</div><h2 class="stitle">Complete Auto Care<br/>Under One Roof</h2></div>
-      <p class="sdesc">From routine oil changes to complex engine work — our ASE-certified team handles every make and model.</p>
+<!-- SERVICES PREVIEW -->
+<section class="section services-section" id="services">
+  <div class="section-inner">
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:60px;gap:40px;flex-wrap:wrap;">
+      <div>
+        <div class="section-label fade-up"><div class="section-label-line"></div><span>What We Do</span></div>
+        <h2 class="section-title fade-up">Complete Auto Care<br/>Under One Roof</h2>
+      </div>
+      <p class="section-desc fade-up">From routine oil changes to complex engine work — our ASE-certified team handles every make and model.</p>
     </div>
-    <div class="svcs-grid reveal">
-
-      <div class="sc-wrap">
-        <div class="sc">
-          <div class="sc-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FF6B1A" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg></div>
-          <h3>Oil Change & Lube</h3>
-          <p>Full synthetic, conventional, or high-mileage. Quick and thorough — includes a 27-point inspection.</p>
-          <span class="sc-pill">From $49.95</span>
-        </div>
-        <canvas class="sc-canvas"></canvas>
+    <div class="services-grid">
+      <div class="service-card fade-up">
+        <div class="service-icon">🔄</div>
+        <h3>Oil Change & Lube</h3>
+        <p>Full synthetic, conventional, or high-mileage. Quick and thorough — includes a 27-point inspection.</p>
+        <span class="service-price">From $49.95</span>
       </div>
-
-      <div class="sc-wrap">
-        <div class="sc">
-          <div class="sc-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FF6B1A" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg></div>
-          <h3>Brake Service</h3>
-          <p>Pads, rotors, calipers, and fluid — keeping you safe on Seattle's hills and rainy roads.</p>
-          <span class="sc-pill">Free Inspection</span>
-        </div>
-        <canvas class="sc-canvas"></canvas>
+      <div class="service-card fade-up">
+        <div class="service-icon">🛑</div>
+        <h3>Brake Service</h3>
+        <p>Pads, rotors, calipers, and fluid — keeping you safe on Seattle's hills and rainy roads.</p>
+        <span class="service-price">Free Inspection</span>
       </div>
-
-      <div class="sc-wrap">
-        <div class="sc">
-          <div class="sc-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FF6B1A" stroke-width="2"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg></div>
-          <h3>Engine Repair</h3>
-          <p>Check engine lights, timing belts, head gaskets — diagnosed right, fixed to last.</p>
-          <span class="sc-pill">Expert Diagnostics</span>
-        </div>
-        <canvas class="sc-canvas"></canvas>
+      <div class="service-card fade-up">
+        <div class="service-icon">⚙️</div>
+        <h3>Engine Repair</h3>
+        <p>Check engine lights, timing belts, head gaskets — diagnosed right, fixed to last.</p>
+        <span class="service-price">Expert Diagnostics</span>
       </div>
-
-      <div class="sc-wrap">
-        <div class="sc">
-          <div class="sc-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FF6B1A" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
-          <h3>Transmission</h3>
-          <p>Automatic and manual service, fluid flushes, clutch replacements, and full rebuilds.</p>
-          <span class="sc-pill">All Transmissions</span>
-        </div>
-        <canvas class="sc-canvas"></canvas>
+      <div class="service-card fade-up">
+        <div class="service-icon">🔧</div>
+        <h3>Transmission</h3>
+        <p>Automatic and manual service, fluid flushes, clutch replacements, and full rebuilds.</p>
+        <span class="service-price">All Transmissions</span>
       </div>
-
-      <div class="sc-wrap">
-        <div class="sc">
-          <div class="sc-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FF6B1A" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-          <h3>Suspension & Alignment</h3>
-          <p>Struts, shocks, tie rods, and precision alignment — crucial for Seattle's winding roads.</p>
-          <span class="sc-pill">4-Wheel Alignment</span>
-        </div>
-        <canvas class="sc-canvas"></canvas>
+      <div class="service-card fade-up">
+        <div class="service-icon">🚗</div>
+        <h3>Suspension & Alignment</h3>
+        <p>Struts, shocks, tie rods, and precision alignment — crucial for Seattle's winding roads.</p>
+        <span class="service-price">4-Wheel Alignment</span>
       </div>
-
-      <div class="sc-wrap">
-        <div class="sc">
-          <div class="sc-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FF6B1A" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
-          <h3>Electrical & AC</h3>
-          <p>Battery, alternator, AC recharge, heater cores — stay comfortable year-round.</p>
-          <span class="sc-pill">AC Recharge $89</span>
-        </div>
-        <canvas class="sc-canvas"></canvas>
+      <div class="service-card fade-up">
+        <div class="service-icon">⚡</div>
+        <h3>Electrical & AC</h3>
+        <p>Battery, alternator, AC recharge, heater cores — stay comfortable year-round.</p>
+        <span class="service-price">AC Recharge $89</span>
       </div>
-
+    </div>
+    <div style="text-align:center;margin-top:40px;">
+      <a href="pages/services.html" class="btn-primary" style="display:inline-flex;">View All Services →</a>
     </div>
   </div>
 </section>
 
 <!-- PROCESS -->
-<section>
-  <div class="si">
-    <div style="text-align:center;">
-      <div class="stag" style="justify-content:center;">The Process</div>
-      <h2 class="stitle" style="text-align:center;">Easy as 1–2–3–4</h2>
-      <p class="sdesc" style="margin:0 auto;text-align:center;">We make car repair stress-free. Here's what to expect from your first call to driving away.</p>
+<section class="section process-section">
+  <div class="section-inner">
+    <div style="text-align:center;margin-bottom:0;">
+      <div class="section-label fade-up" style="justify-content:center;"><div class="section-label-line"></div><span>How It Works</span></div>
+      <h2 class="section-title fade-up" style="text-align:center;">Easy as 1 – 2 – 3 – 4</h2>
+      <p class="section-desc fade-up" style="margin:0 auto;text-align:center;">We make car repair stress-free. Here's what to expect from your first call to driving away.</p>
     </div>
-    <div class="proc-steps reveal">
-      <div class="pstep"><div class="pcircle">1</div><h3>Schedule</h3><p>Call or book online. We'll find a time that works — often same-day or next morning.</p></div>
-      <div class="pstep"><div class="pcircle">2</div><h3>Diagnose</h3><p>Thorough inspection and a clear written estimate before any work begins.</p></div>
-      <div class="pstep"><div class="pcircle">3</div><h3>Repair</h3><p>Certified technicians complete the work using quality parts. We'll update you throughout.</p></div>
-      <div class="pstep"><div class="pcircle">4</div><h3>Drive Away</h3><p>Pick up with confidence — backed by our 12-month/12,000-mile warranty.</p></div>
+    <div class="process-steps">
+      <div class="process-step fade-up">
+        <div class="process-circle">1</div>
+        <h3>Schedule</h3>
+        <p>Call or book online. We'll find a time that works — often same-day or next morning.</p>
+      </div>
+      <div class="process-step fade-up">
+        <div class="process-circle">2</div>
+        <h3>Diagnose</h3>
+        <p>Thorough inspection and a clear written estimate before any work begins.</p>
+      </div>
+      <div class="process-step fade-up">
+        <div class="process-circle">3</div>
+        <h3>Repair</h3>
+        <p>Certified technicians complete the work using quality parts. We'll update you throughout.</p>
+      </div>
+      <div class="process-step fade-up">
+        <div class="process-circle">4</div>
+        <h3>Drive Away</h3>
+        <p>Pick up with confidence — backed by our 12-month/12,000-mile warranty.</p>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- WHY -->
-<section style="background:var(--navy-mid);">
-  <div class="si">
+<!-- WHY US -->
+<section class="section why-section">
+  <div class="section-inner">
     <div class="why-grid">
       <div>
-        <div class="stag">Why Choose Us</div>
-        <h2 class="stitle">The G & M Difference</h2>
-        <ul class="why-list reveal">
-          <li class="witem"><div class="wnum">01</div><div><div class="wt">No Surprise Bills. Ever.</div><p class="wd">Full written estimate before we touch your car. If something changes, we call you first — always your approval.</p></div></li>
-          <li class="witem"><div class="wnum">02</div><div><div class="wt">We Speak Your Language</div><p class="wd">Plain English explanations with photos when helpful. No jargon, no upselling on services you don't need.</p></div></li>
-          <li class="witem"><div class="wnum">03</div><div><div class="wt">Locally Rooted Since 1998</div><p class="wd">25+ years repairing Seattle families' cars. Our reputation is our livelihood — every customer is a neighbor.</p></div></li>
-          <li class="witem"><div class="wnum">04</div><div><div class="wt">Backed by Warranty</div><p class="wd">Every repair: 12-month / 12,000-mile warranty on parts and labor. If something goes wrong, we make it right.</p></div></li>
+        <div class="section-label fade-up"><div class="section-label-line"></div><span>Why Choose Us</span></div>
+        <h2 class="section-title fade-up">The G & M Difference</h2>
+        <ul class="why-list">
+          <li class="why-item fade-up">
+            <div class="why-num">01</div>
+            <div><div class="why-title">No Surprise Bills. Ever.</div><p class="why-desc">Full written estimate before we touch your car. If something changes, we call you first — always your approval.</p></div>
+          </li>
+          <li class="why-item fade-up">
+            <div class="why-num">02</div>
+            <div><div class="why-title">We Speak Your Language</div><p class="why-desc">Plain English explanations with photos when helpful. No jargon, no upselling on services you don't need.</p></div>
+          </li>
+          <li class="why-item fade-up">
+            <div class="why-num">03</div>
+            <div><div class="why-title">Locally Rooted Since 1998</div><p class="why-desc">25+ years repairing Seattle families' cars. Our reputation is our livelihood — every customer is a neighbor.</p></div>
+          </li>
+          <li class="why-item fade-up">
+            <div class="why-num">04</div>
+            <div><div class="why-title">Backed by Warranty</div><p class="why-desc">Every repair: 12-month / 12,000-mile warranty on parts and labor. If something goes wrong, we make it right.</p></div>
+          </li>
         </ul>
       </div>
-      <div class="reveal">
+      <div class="fade-up">
         <div class="why-card">
-          <div class="wstars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
-          <p class="wquote">"They treated my 2012 Civic like it was a <strong>brand-new car</strong> worth fixing right."</p>
-          <div class="wattr"><div class="wavatar">S</div><div><div class="wan">Sarah M.</div><div class="war">Capitol Hill · Customer since 2019</div></div></div>
+          <div class="why-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+          <p class="why-quote">"They treated my 2012 Civic like it was a <strong>brand-new car</strong> worth fixing right."</p>
+          <div class="why-attr">
+            <div class="why-avatar">S</div>
+            <div>
+              <div class="why-name">Sarah M.</div>
+              <div class="why-role">Capitol Hill · Customer since 2019</div>
+            </div>
+          </div>
         </div>
         <div class="stat-pill">
-          <div class="sp-num">96%</div>
-          <div class="sp-lbl"><strong>Same-Day Completion</strong>Most repairs finished the day you drop off</div>
+          <div class="stat-pill-num">96%</div>
+          <div class="stat-pill-label">
+            <strong>Same-Day Completion</strong>
+            Most repairs finished the day you drop off
+          </div>
         </div>
       </div>
     </div>
@@ -616,299 +278,211 @@
 </section>
 
 <!-- REVIEWS -->
-<section class="reviews" id="reviews">
-  <div class="si">
-    <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:20px;">
-      <div><div class="stag">Customer Reviews</div><h2 class="stitle">What Seattle Drivers Say</h2></div>
+<section class="section reviews-section" id="reviews">
+  <div class="section-inner">
+    <div class="reviews-header">
       <div>
-        <div style="font-family:var(--serif);font-size:44px;color:var(--orange-hot);line-height:1;text-align:right;">4.9</div>
-        <div style="color:var(--orange-glow);text-align:right;font-size:18px;">★★★★★</div>
-        <div style="font-size:12px;color:var(--muted);text-align:right;margin-top:2px;">312 Google Reviews</div>
+        <div class="section-label fade-up"><div class="section-label-line"></div><span>Customer Reviews</span></div>
+        <h2 class="section-title fade-up">What Seattle Drivers Say</h2>
+      </div>
+      <div class="reviews-rating fade-up">
+        <div class="reviews-rating-num">4.9</div>
+        <div class="reviews-rating-stars">★★★★★</div>
+        <div class="reviews-rating-count">312 Google Reviews</div>
       </div>
     </div>
-    <div class="reviews-grid reveal">
-      <div class="rev-card"><div class="rstars"><span>★★★★★</span></div><p class="rtext">"I've been bringing both my cars here for 6 years. Honest, fast, fair. After a dealer quoted me $1,800 for a job G&M did for $480, I'll never go anywhere else."</p><div class="rauth"><div class="rinit" style="background:linear-gradient(135deg,#FF6B1A,#FF8C42);">JK</div><div><div class="rname">James K.</div><div class="rloc">Ballard · 2 months ago</div></div></div></div>
-      <div class="rev-card"><div class="rstars"><span>★★★★★</span></div><p class="rtext">"As a woman who knows nothing about cars, I've always been nervous. G&M was the first shop where I didn't feel talked down to. They showed me photos and explained everything."</p><div class="rauth"><div class="rinit" style="background:linear-gradient(135deg,#2563EB,#4DA6FF);">AM</div><div><div class="rname">Angela M.</div><div class="rloc">Fremont · 3 weeks ago</div></div></div></div>
-      <div class="rev-card"><div class="rstars"><span>★★★★★</span></div><p class="rtext">"Dropped my truck off at 8am with a mystery noise. Called by noon with a diagnosis and estimate, done by 3pm. That's how every shop should operate."</p><div class="rauth"><div class="rinit" style="background:linear-gradient(135deg,#1A3A6B,#2563EB);">RT</div><div><div class="rname">Ryan T.</div><div class="rloc">Georgetown · 1 month ago</div></div></div></div>
-    </div>
-  </div>
-</section>
-
-<!-- ABOUT -->
-<section id="about">
-  <div class="si">
-    <div class="about-grid">
-      <div class="about-vis reveal">
-        <svg width="280" height="200" viewBox="0 0 300 220" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:relative;z-index:1;">
-          <rect x="20" y="80" width="260" height="130" fill="#0A1628" rx="4"/>
-          <path d="M10 80 L150 20 L290 80Z" fill="#112240"/>
-          <rect x="60" y="100" width="180" height="110" fill="#050D1A" rx="3"/>
-          <rect x="65" y="105" width="170" height="20" fill="#0D1B35"/>
-          <rect x="65" y="128" width="170" height="20" fill="#0D1B35"/>
-          <rect x="65" y="151" width="170" height="20" fill="#0D1B35"/>
-          <rect x="65" y="174" width="170" height="20" fill="#0D1B35"/>
-          <circle cx="150" cy="162" r="6" fill="#FF6B1A"/>
-          <rect x="120" y="55" width="60" height="40" fill="#4DA6FF" opacity=".2" rx="3"/>
-          <line x1="150" y1="55" x2="150" y2="95" stroke="#1A3A6B" stroke-width="2"/>
-          <line x1="120" y1="75" x2="180" y2="75" stroke="#1A3A6B" stroke-width="2"/>
-          <rect x="90" y="32" width="120" height="30" fill="#FF6B1A" rx="4"/>
-          <text x="150" y="52" text-anchor="middle" font-family="serif" font-size="13" font-weight="bold" fill="white">G &amp; M AUTO</text>
-          <rect x="0" y="207" width="300" height="13" fill="#050D1A"/>
-          <circle cx="150" cy="96" r="5" fill="#FFB347" opacity=".9"/>
-          <circle cx="150" cy="96" r="14" fill="#FFB347" opacity=".1"/>
-        </svg>
-        <div class="about-year"><div class="ay-num">1998</div><div class="ay-lbl">Est.</div></div>
+    <div class="reviews-grid">
+      <div class="review-card fade-up">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"I've been bringing both my cars here for 6 years. Honest, fast, fair. After a dealer quoted me $1,800 for a job G&M did for $480, I'll never go anywhere else."</p>
+        <div class="review-author">
+          <div class="review-initials" style="background:linear-gradient(135deg,#FF6B1A,#FF8C42);">JK</div>
+          <div><div class="review-name">James K.</div><div class="review-location">Ballard · 2 months ago</div></div>
+        </div>
       </div>
-      <div class="reveal">
-        <div class="stag">Our Story</div>
-        <h2 class="stitle">A Seattle Family,<br/>Serving Seattle Families</h2>
-        <p class="atext">G & M Family Auto Repair was founded in 1998 by George and Maria Vasquez with a simple belief: people deserve a mechanic they can actually trust. What started as a two-bay shop in South Seattle has grown into a full-service center — but the family values haven't changed.</p>
-        <p class="atext" style="margin-top:14px;">Today, their son Marco and a team of ASE-certified technicians carry on the tradition of honest, quality work. Many clients have been with us 15+ years — now bringing in their kids' first cars.</p>
-        <div class="avals">
-          <div class="aval"><div class="aval-ic">🤝</div><h4>Honesty First</h4><p>We only recommend what you actually need</p></div>
-          <div class="aval"><div class="aval-ic">🔧</div><h4>Quality Work</h4><p>ASE-certified on every make and model</p></div>
-          <div class="aval"><div class="aval-ic">🏠</div><h4>Community Roots</h4><p>25+ years serving Seattle neighborhoods</p></div>
-          <div class="aval"><div class="aval-ic">💬</div><h4>Clear Communication</h4><p>Always in the loop, never surprised</p></div>
+      <div class="review-card fade-up">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"As a woman who knows nothing about cars, I've always been nervous. G&M was the first shop where I didn't feel talked down to. They showed me photos and explained everything."</p>
+        <div class="review-author">
+          <div class="review-initials" style="background:linear-gradient(135deg,#2563EB,#4DA6FF);">AM</div>
+          <div><div class="review-name">Angela M.</div><div class="review-location">Fremont · 3 weeks ago</div></div>
+        </div>
+      </div>
+      <div class="review-card fade-up">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"Dropped my truck off at 8am with a mystery noise. Called by noon with a diagnosis and estimate, done by 3pm. That's how every shop should operate."</p>
+        <div class="review-author">
+          <div class="review-initials" style="background:linear-gradient(135deg,#1A3A6B,#2563EB);">RT</div>
+          <div><div class="review-name">Ryan T.</div><div class="review-location">Georgetown · 1 month ago</div></div>
         </div>
       </div>
     </div>
+    <div style="text-align:center;margin-top:40px;">
+      <a href="pages/reviews.html" class="btn-outline" style="display:inline-flex;">Read All Reviews →</a>
+    </div>
   </div>
 </section>
 
-<!-- CTA -->
-<div class="cta" id="contact">
-  <div class="si">
-    <div class="stag" style="color:rgba(180,210,255,.45);justify-content:center;">Ready to Book?</div>
-    <h2>Your Car — and Your Peace of Mind<br/>— Matters to Us</h2>
-    <p>Call us, stop by, or book online. Mon–Fri 8am–6pm · Sat 8am–4pm.</p>
-    <div class="cta-btns">
-      <a href="tel:+12065550198" class="btn-orange"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.9a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .18h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>(206) 555-0198</a>
-      <a href="mailto:service@gmfamilyauto.com" class="btn-glass"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>Email Us</a>
-      <a href="#" class="btn-glass"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Book Online</a>
+<!-- BOOKING / CONTACT -->
+<section class="booking-section" id="booking">
+  <div class="booking-inner">
+    <div class="booking-info">
+      <div class="section-label fade-up"><div class="section-label-line"></div><span>Book an Appointment</span></div>
+      <h2 class="section-title fade-up">Ready to Bring<br/>Your Car In?</h2>
+      <p class="section-desc fade-up" style="margin-bottom:36px;">Fill in the form and we'll call you within 1 hour to confirm your appointment. Or just call us directly.</p>
+
+      <div class="fade-up">
+        <div class="contact-item">
+          <div class="contact-icon">📞</div>
+          <div>
+            <div class="contact-label">Phone</div>
+            <div class="contact-value"><a href="tel:+12065550198" style="color:white;">(206) 555-0198</a></div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">📧</div>
+          <div>
+            <div class="contact-label">Email</div>
+            <div class="contact-value">service@gmfamilyauto.com</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">📍</div>
+          <div>
+            <div class="contact-label">Address</div>
+            <div class="contact-value">4521 Rainier Ave S<br/>Seattle, WA 98118</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">🕐</div>
+          <div>
+            <div class="contact-label">Hours</div>
+            <div class="contact-value">Mon–Fri: 8am–6pm<br/>Sat: 8am–4pm · Sun: Closed</div>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="cta-meta">
-      <div class="cmeta"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>4521 Rainier Ave S, Seattle, WA 98118</div>
-      <div class="cmeta"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Mon–Fri: 8am–6pm · Sat: 8am–4pm</div>
+
+    <div class="booking-form-wrap fade-up" id="bookingFormWrap">
+      <div class="form-title">Book an Appointment</div>
+      <div class="form-subtitle">We'll confirm within 1 hour. Most appointments available same or next day.</div>
+      <form id="bookingForm">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Your Name *</label>
+            <input type="text" class="form-input" id="b-name" placeholder="Full name" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Phone *</label>
+            <input type="tel" class="form-input" id="b-phone" placeholder="(206) 555-0000" required />
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email</label>
+          <input type="email" class="form-input" id="b-email" placeholder="you@email.com" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Service Needed *</label>
+          <select class="form-select" id="b-service" required>
+            <option value="">Select a service...</option>
+            <option>Oil Change & Lube</option>
+            <option>Brake Service</option>
+            <option>Engine Repair / Diagnostics</option>
+            <option>Transmission Service</option>
+            <option>Suspension & Alignment</option>
+            <option>Electrical & AC</option>
+            <option>General Inspection</option>
+            <option>Other / Not Sure</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Vehicle (Year, Make, Model)</label>
+          <input type="text" class="form-input" id="b-vehicle" placeholder="e.g. 2018 Toyota Camry" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Preferred Date</label>
+          <input type="date" class="form-input" id="b-date" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Describe the Issue</label>
+          <textarea class="form-textarea" id="b-notes" placeholder="Any noises, warning lights, or symptoms..."></textarea>
+        </div>
+        <button type="submit" class="btn-submit" id="bookingSubmitBtn">Request Appointment</button>
+      </form>
     </div>
   </div>
-</div>
+</section>
 
 <!-- FOOTER -->
 <footer>
-  <div class="fi">
-    <div class="ftop">
-      <div class="fbrand">
-        <div class="fname">G & M Family Auto Repair</div>
-        <p>Seattle's trusted family-owned auto repair shop since 1998. Honest service, quality work, and a team that cares about getting you back on the road safely.</p>
-        <div style="margin-top:24px;">
-          <div style="font-size:10px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:rgba(180,210,255,.25);margin-bottom:12px;">Hours</div>
-          <div class="fhr"><span class="day">Mon – Fri</span><span>8:00am – 6:00pm</span></div>
-          <div class="fhr"><span class="day">Saturday</span><span>8:00am – 4:00pm</span></div>
-          <div class="fhr"><span class="day">Sunday</span><span style="color:rgba(180,210,255,.2);">Closed</span></div>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div>
+        <div class="nav-logo" style="margin-bottom:16px;">
+          <div class="nav-logo-mark">G&M</div>
+          <div class="nav-logo-text">
+            <span class="nav-logo-name">G & M Family Auto</span>
+            <span class="nav-logo-sub">Seattle, Washington</span>
+          </div>
+        </div>
+        <p style="color:rgba(180,210,255,0.35);font-size:14px;line-height:1.75;max-width:280px;">Seattle's trusted family-owned auto repair shop since 1998. Honest service, quality work, and a team that cares about getting you back on the road safely.</p>
+        <div class="footer-hours" style="margin-top:24px;">
+          <div style="font-size:10px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:rgba(180,210,255,0.25);margin-bottom:12px;">Hours</div>
+          <div class="footer-hour-row"><span class="day">Mon – Fri</span><span>8:00am – 6:00pm</span></div>
+          <div class="footer-hour-row"><span class="day">Saturday</span><span>8:00am – 4:00pm</span></div>
+          <div class="footer-hour-row"><span class="day">Sunday</span><span style="color:rgba(180,210,255,0.2);">Closed</span></div>
         </div>
       </div>
-      <div class="fcol"><h4>Services</h4><ul class="flinks"><li><a href="#">Oil Change & Lube</a></li><li><a href="#">Brake Service</a></li><li><a href="#">Engine Repair</a></li><li><a href="#">Transmission</a></li><li><a href="#">Suspension & Alignment</a></li><li><a href="#">Electrical & AC</a></li></ul></div>
-      <div class="fcol"><h4>Company</h4><ul class="flinks"><li><a href="#">About Us</a></li><li><a href="#">Our Team</a></li><li><a href="#">Reviews</a></li><li><a href="#">Warranty Policy</a></li><li><a href="#">Fleet Services</a></li><li><a href="#">Careers</a></li></ul></div>
-      <div class="fcol">
+
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul class="footer-links">
+          <li><a href="pages/services.html">Oil Change & Lube</a></li>
+          <li><a href="pages/services.html">Brake Service</a></li>
+          <li><a href="pages/services.html">Engine Repair</a></li>
+          <li><a href="pages/services.html">Transmission</a></li>
+          <li><a href="pages/services.html">Suspension & Alignment</a></li>
+          <li><a href="pages/services.html">Electrical & AC</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul class="footer-links">
+          <li><a href="pages/about.html">About Us</a></li>
+          <li><a href="pages/about.html">Our Team</a></li>
+          <li><a href="pages/reviews.html">Reviews</a></li>
+          <li><a href="#booking">Book Appointment</a></li>
+          <li><a href="#services">Warranty Policy</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
         <h4>Contact</h4>
-        <div class="fcon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07"/></svg>(206) 555-0198</div>
-        <div class="fcon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12"/></svg>service@gmfamilyauto.com</div>
-        <div class="fcon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/></svg>4521 Rainier Ave S<br/>Seattle, WA 98118</div>
+        <div class="footer-contact">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.9a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .18h3a2 2 0 012 1.72"/></svg>
+          <a href="tel:+12065550198" style="color:rgba(180,210,255,0.5);">(206) 555-0198</a>
+        </div>
+        <div class="footer-contact">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          service@gmfamilyauto.com
+        </div>
+        <div class="footer-contact">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          4521 Rainier Ave S<br/>Seattle, WA 98118
+        </div>
       </div>
     </div>
-    <div class="fbot"><p>© 2025 G & M Family Auto Repair, Inc. All rights reserved.</p><p>ASE Certified · BBB Accredited · Proudly serving Seattle since 1998</p></div>
+
+    <div class="footer-bottom">
+      <p>© 2025 G & M Family Auto Repair. All rights reserved.</p>
+      <p>ASE Certified · BBB Accredited · Proudly serving Seattle since 1998</p>
+    </div>
   </div>
 </footer>
 
-<script>
-/* ═══════════════════════════════════════════════════════════
-   GLASS SHATTER — canvas-based Voronoi explosion on mouseenter
-═══════════════════════════════════════════════════════════ */
-(function() {
-  const PALETTE = [
-    [77,  166, 255],   // electric blue
-    [37,  99,  235],   // royal blue
-    [255, 107, 26 ],   // orange
-    [255, 140, 66 ],   // orange-hot
-    [180, 210, 255],   // light blue
-    [255, 179, 71 ],   // amber
-  ];
+<div class="toast" id="toast"><span>✅</span><span class="toast-msg">Done!</span></div>
 
-  document.querySelectorAll('.sc-wrap').forEach(wrap => {
-    const canvas = wrap.querySelector('.sc-canvas');
-    let raf = null, active = false;
-
-    function shatter(e) {
-      if (active) return;
-      active = true;
-
-      const rect  = wrap.getBoundingClientRect();
-      const W = rect.width, H = rect.height;
-      canvas.width  = W;
-      canvas.height = H;
-      canvas.style.opacity = 1;
-
-      // Impact point
-      const ix = e ? e.clientX - rect.left : W * 0.5;
-      const iy = e ? e.clientY - rect.top  : H * 0.5;
-
-      // Generate Voronoi sites — bias near impact
-      const N = 28;
-      const sites = [[ix, iy]];
-      for (let i = 1; i < N; i++) {
-        const angle = Math.random() * Math.PI * 2;
-        const r = 20 + Math.random() * Math.max(W, H);
-        sites.push([
-          ix + Math.cos(angle) * r * (0.3 + Math.random() * 0.7),
-          iy + Math.sin(angle) * r * (0.3 + Math.random() * 0.7)
-        ]);
-      }
-
-      // Assign pixels to nearest site (low-res grid)
-      const RES = 3;
-      const cols = Math.ceil(W / RES), rows = Math.ceil(H / RES);
-      const cellMap = new Array(N).fill(null).map(() => []);
-
-      for (let row = 0; row < rows; row++) {
-        for (let col = 0; col < cols; col++) {
-          const px = col * RES + RES / 2, py = row * RES + RES / 2;
-          let best = 0, bestD = Infinity;
-          for (let s = 0; s < N; s++) {
-            const dx = px - sites[s][0], dy = py - sites[s][1];
-            const d  = dx * dx + dy * dy;
-            if (d < bestD) { bestD = d; best = s; }
-          }
-          cellMap[best].push([px, py]);
-        }
-      }
-
-      // Build shards with physics
-      const shards = sites.map((site, i) => {
-        const pts = cellMap[i];
-        if (!pts.length) return null;
-        // centroid
-        const cx = pts.reduce((a, p) => a + p[0], 0) / pts.length;
-        const cy = pts.reduce((a, p) => a + p[1], 0) / pts.length;
-        // velocity: away from impact
-        const dx = cx - ix, dy = cy - iy;
-        const dist = Math.sqrt(dx * dx + dy * dy) + 1;
-        const spd  = 1.8 + Math.random() * 3.5 + 60 / (dist + 15);
-        const col  = PALETTE[i % PALETTE.length];
-        return {
-          pts, cx, cy,
-          vx: (dx / dist) * spd + (Math.random() - 0.5) * 2,
-          vy: (dy / dist) * spd + (Math.random() - 0.5) * 2 - 0.5,
-          rot: 0,
-          rotV: (Math.random() - 0.5) * 0.06,
-          alpha: 1,
-          col
-        };
-      }).filter(Boolean);
-
-      const ctx = canvas.getContext('2d');
-      let frame = 0;
-
-      function tick() {
-        ctx.clearRect(0, 0, W, H);
-
-        // Burst flash
-        if (frame < 8) {
-          const g = ctx.createRadialGradient(ix, iy, 0, ix, iy, 50 + frame * 15);
-          g.addColorStop(0, `rgba(255,200,100,${0.55 - frame * 0.07})`);
-          g.addColorStop(1, 'rgba(255,107,26,0)');
-          ctx.fillStyle = g;
-          ctx.fillRect(0, 0, W, H);
-        }
-
-        let alive = false;
-        shards.forEach(sh => {
-          if (sh.alpha <= 0) return;
-          alive = true;
-
-          // Convex hull of pts (approximate: just use pts as polygon in sorted order)
-          const sorted = [...sh.pts].sort((a, b) => {
-            const aA = Math.atan2(a[1] - sh.cy, a[0] - sh.cx);
-            const bA = Math.atan2(b[1] - sh.cy, b[0] - sh.cx);
-            return aA - bA;
-          });
-
-          ctx.save();
-          ctx.translate(sh.cx, sh.cy);
-          ctx.rotate(sh.rot);
-
-          const [r, g, b] = sh.col;
-          ctx.beginPath();
-          sorted.forEach(([px, py], vi) => {
-            const lx = px - sh.cx, ly = py - sh.cy;
-            vi === 0 ? ctx.moveTo(lx, ly) : ctx.lineTo(lx, ly);
-          });
-          ctx.closePath();
-
-          // Glass fill
-          ctx.fillStyle = `rgba(${r},${g},${b},${sh.alpha * 0.15})`;
-          ctx.fill();
-
-          // Glowing edge
-          ctx.shadowColor  = `rgba(${r},${g},${b},0.9)`;
-          ctx.shadowBlur   = 10;
-          ctx.strokeStyle  = `rgba(${r},${g},${b},${sh.alpha * 0.95})`;
-          ctx.lineWidth    = 1.8;
-          ctx.stroke();
-
-          // White highlight
-          ctx.shadowBlur   = 0;
-          ctx.strokeStyle  = `rgba(255,255,255,${sh.alpha * 0.25})`;
-          ctx.lineWidth    = 0.6;
-          ctx.stroke();
-
-          ctx.restore();
-
-          // Physics
-          sh.cx   += sh.vx;
-          sh.cy   += sh.vy;
-          sh.vy   += 0.18;           // gravity
-          sh.rot  += sh.rotV;
-          sh.alpha -= 0.022;
-        });
-
-        frame++;
-        if (!alive || frame > 130) {
-          canvas.style.opacity = 0;
-          active = false;
-          return;
-        }
-        raf = requestAnimationFrame(tick);
-      }
-
-      raf = requestAnimationFrame(tick);
-    }
-
-    wrap.addEventListener('mouseenter', e => {
-      cancelAnimationFrame(raf);
-      active = false;
-      shatter(e);
-    });
-  });
-})();
-
-/* ── SCROLL REVEAL ── */
-const obs = new IntersectionObserver(entries => {
-  entries.forEach((e, i) => {
-    if (e.isIntersecting) {
-      setTimeout(() => e.target.classList.add('visible'), i * 90);
-      obs.unobserve(e.target);
-    }
-  });
-}, { threshold: 0.08 });
-document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
-
-/* ── NAV GLOW ── */
-const nav = document.querySelector('nav');
-window.addEventListener('scroll', () => {
-  nav.style.borderBottomColor = window.scrollY > 30
-    ? 'rgba(77,166,255,0.22)'
-    : 'rgba(77,166,255,0.12)';
-});
-</script>
+<script src="js/main.js"></script>
 </body>
 </html>
